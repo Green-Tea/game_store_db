@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="game_store_db_91s3@dpg-cnjfnhn109ks73boctrg-a.singapore-postgres.render.com" uuid="625c7e40-c91a-49af-af17-ee49ee65bfc1">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://dpg-cnjfnhn109ks73boctrg-a.singapore-postgres.render.com:5432/game_store_db_91s3</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
