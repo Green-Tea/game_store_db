@@ -109,12 +109,13 @@ EXECUTE FUNCTION update_game_genres_junction();
 
 CREATE TABLE customers
 (
-  customer_id   SERIAL      PRIMARY KEY,
-  first_name    VARCHAR(255) NOT NULL,
-  last_name     VARCHAR(255) NOT NULL,
-  display_name  VARCHAR(20),
-  email         VARCHAR(255) NOT NULL,
-  password      VARCHAR(64) NOT NULL
+  customer_id       SERIAL          PRIMARY KEY,
+  first_name        VARCHAR(255)    NOT NULL,
+  last_name         VARCHAR(255)    NOT NULL,
+  display_name      VARCHAR(20),
+  email             VARCHAR(255)    NOT NULL,
+  password          VARCHAR(64)     NOT NULL,
+  owned_game_ids    INT[]           DEFAULT ARRAY[]::INT[]
 );
 
 CREATE TABLE customer_payment_info
