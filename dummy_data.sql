@@ -528,12 +528,12 @@ UPDATE games
 SET promotion_id = 2
 WHERE title = 'HELLDIVERS 2';
 
--- CASE: John Doe purchases game_id 2 and 4 while game 2 is on sale
+-- CASE: John Doe purchases world of warcraft and assassin creed valhalla
 BEGIN;
 
 -- Transaction amount and customer id is known
 INSERT INTO transaction_details (customer_id, amount)
-VALUES (1, 81.00);
+VALUES (1, 109.98);
 
 -- Fetch corresponding transaction_id. Game IDs can be passed through the frontend
 INSERT INTO game_purchases (customer_id, transaction_id, game_id)
@@ -546,6 +546,14 @@ VALUES (
     1,
     CURRVAL('transaction_details_transaction_id_seq'),
     (SELECT game_id FROM games WHERE title = 'Assassin Creed Valhalla')
+);
+
+-- Update customer's owned_game_ids after purchase
+UPDATE customers
+SET owned_game_ids = owned_game_ids || (
+    SELECT ARRAY_AGG(game_id)
+    FROM game_purchases
+    WHERE customer_id = 1
 );
 
 COMMIT;
