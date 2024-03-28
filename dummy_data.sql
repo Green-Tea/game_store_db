@@ -1,16 +1,15 @@
 -- Insert dummy data into the publishers table
 INSERT INTO publishers (name, email, address, revenue_split)
-VALUES ('Blizzard', 'blizzard@example.com', 'Blizzard Address', 70),
-       ('Electronic Arts', 'ea@example.com', 'EA Address', 65),
-       ('FromSoftware Inc.', 'fromsoft@example.com',
-        'Shibuya Hikarie 27F, 2-21-1 Shibuya, Shibuya-ku, Tokyo, 150-8510 Japan', 40),
-       ('CAPCOM Co., Ltd', 'capcom@example.com', '3-1-3 Uchihiranomachi, Chuo-ku, Osaka, 540-0037, Japan', 40),
-       ('PlayStation PC LLC', 'playstation@example.com', 'PlayStation Address', 30),
-       ('Ubisoft', 'ubisoft@example.com', 'Ubisoft Address', 60),
-       ('Square Enix', 'squareenix@example.com', 'Square Enix Address', 50),
-       ('Nintendo', 'nintendo@example.com', 'Nintendo Address', 55),
-       ('Bethesda Softworks', 'bethesda@example.com', 'Bethesda Address', 45),
-       ('Valve Corporation', 'valve@example.com', 'Valve Address', 60);
+VALUES ('Blizzard', 'blizzard@example.com', 'USA', 70),
+       ('Electronic Arts', 'ea@example.com', 'USA', 65),
+       ('FromSoftware Inc.', 'fromsoft@example.com', 'Tokyo, Japan', 40),
+       ('CAPCOM Co., Ltd', 'capcom@example.com', 'Osaka, Japan', 40),
+       ('PlayStation PC LLC', 'playstation@example.com', 'USA', 30),
+       ('Ubisoft', 'ubisoft@example.com', 'USA', 60),
+       ('Square Enix', 'squareenix@example.com', 'USA', 50),
+       ('Nintendo', 'nintendo@example.com', 'USA', 55),
+       ('Bethesda Softworks', 'bethesda@example.com', 'USA', 45),
+       ('Valve Corporation', 'valve@example.com', 'USA', 60);
 
 -- Insert dummy data into the games table
 -- DO NOT DEFINE GENRES YET, A TRIGGER IS SET TO AUTOMATICALLY UPDATE game_genres_junction UPON SETTING GENRES
@@ -45,7 +44,7 @@ VALUES ('Apex Legends',
         4,
         'CAPCOM Co., Ltd',
         CAST('2022-01-13' AS DATE)),
-        ('Cyberpunk 2077',
+       ('Cyberpunk 2077',
         'Cyberpunk 2077 is an open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour, and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality.',
         50.00,
         6,
@@ -85,65 +84,118 @@ VALUES ('John', 'Doe', 'JohnnyDooo', 'JohnDoe@gmail.com', 'password'),
        ('Michael', 'Smith', 'MSmith', 'michael.smith@example.com', 'smith123'),
        ('Emily', 'Davis', 'EmDav', 'emily.davis@example.com', 'emily456'),
        ('William', 'Brown', 'WillyB', 'william.brown@example.com', 'brownie'),
-       ('Emma', 'Wilson', 'EWilson', 'emma.wilson@example.com', 'emma789');
+       ('Emma', 'Wilson', 'EWilson', 'emma.wilson@example.com', 'emma789'),
+       ('David', 'Brown', 'DBrown', 'david.brown@example.com', 'david123'),
+       ('Sophia', 'Garcia', 'SophG', 'sophia.garcia@example.com', 'sophia456');
 
 -- Insert dummy data into customer_payment_info table
 INSERT INTO customer_payment_info (customer_id, cardholder_name, card_number, cvv, expiration_date, billing_address,
                                    card_issuer)
 VALUES (1, 'John Doe', 5555555555554444, 123, CAST('2028-04-11' AS DATE),
         '308 Negra Arroyo Lane, Albuquerque, New Mexico', 'MasterCard'),
-       (2, 'Mary Jane', 4111111111111111, 123, CAST('2025-10-21' AS DATE), 'Example Address', 'Visa');
+       (2, 'Mary Jane', 4111111111111111, 123, CAST('2025-10-21' AS DATE), 'Example Address', 'Visa'),
+       (3, 'Clark Kent', 378282246310005, 123, CAST('2027-08-15' AS DATE), 'Daily Planet Building, Metropolis',
+        'American Express'),
+       (4, 'Alice Johnson', 6011111111111117, 123, CAST('2026-05-30' AS DATE), '123 Main Street, Anytown, USA',
+        'Discover'),
+       (5, 'Michael Smith', 3530111333300000, 123, CAST('2024-12-31' AS DATE), '456 Elm Street, Springfield', 'JCB'),
+       (6, 'Emily Davis', 5105105105105100, 123, CAST('2025-09-25' AS DATE), '789 Maple Avenue, Cityville',
+        'MasterCard'),
+       (7, 'William Brown', 6759649826438453, 123, CAST('2026-11-15' AS DATE), '321 Oak Street, Smalltown', 'Visa'),
+       (8, 'Emma Wilson', 4903347295834116, 123, CAST('2025-08-30' AS DATE), '567 Pine Street, Villageland',
+        'MasterCard'),
+       (9, 'David Brown', 4485255488543783, 123, CAST('2026-03-22' AS DATE), '789 Elm Street, Springfield', 'Visa'),
+       (10, 'Sophia Garcia', 6011000990139424, 123, CAST('2025-07-18' AS DATE), '456 Maple Avenue, Cityville',
+        'Discover');
 
 -- Pre-define available game genres
 INSERT INTO game_genres (genre_name)
-VALUES ('Action'), ('Platformer'), ('Shooter'),
-       ('FPS'), ('Third Person'), ('Fighting Game'),
-       ('Beat em up'), ('Stealth'), ('Survival'),
-       ('Rhythm Game'), ('Battle Royale'), ('Adventure'),
-       ('Horror'), ('Metroidvania'), ('Text Based'),
-       ('Visual Novel'), ('Puzzle'), ('Physics'),
-       ('RPG'), ('MMORPG'), ('Multiplayer'),
-       ('Roguelike'), ('Tactical RPG'), ('Sandbox'),
-       ('Party Game'), ('Simulation'), ('Strategy'),
-       ('Auto Chess'), ('MOBA'), ('RTS'),
-       ('RTT'), ('Tower Defense'), ('Turn-based'),
-       ('Sports'), ('Racing'), ('Board Game'),
-       ('Card Game'), ('Gacha'), ('Idle'),
-       ('Trivia'), ('Typing'), ('Casual'),
-       ('Esports'), ('Educational'), ('Fitness'),
-       ('Creative'), ('Open World'), ('Free'),
-       ('PVE'), ('Fantasy'), ('Dark'),
-       ('Souls-like'), ('Co-op'), ('Hunting');
+VALUES ('Action'),
+       ('Platformer'),
+       ('Shooter'),
+       ('FPS'),
+       ('Third Person'),
+       ('Fighting Game'),
+       ('Beat em up'),
+       ('Stealth'),
+       ('Survival'),
+       ('Rhythm Game'),
+       ('Battle Royale'),
+       ('Adventure'),
+       ('Horror'),
+       ('Metroidvania'),
+       ('Text Based'),
+       ('Visual Novel'),
+       ('Puzzle'),
+       ('Physics'),
+       ('RPG'),
+       ('MMORPG'),
+       ('Multiplayer'),
+       ('Roguelike'),
+       ('Tactical RPG'),
+       ('Sandbox'),
+       ('Party Game'),
+       ('Simulation'),
+       ('Strategy'),
+       ('Auto Chess'),
+       ('MOBA'),
+       ('RTS'),
+       ('RTT'),
+       ('Tower Defense'),
+       ('Turn-based'),
+       ('Sports'),
+       ('Racing'),
+       ('Board Game'),
+       ('Card Game'),
+       ('Gacha'),
+       ('Idle'),
+       ('Trivia'),
+       ('Typing'),
+       ('Casual'),
+       ('Esports'),
+       ('Educational'),
+       ('Fitness'),
+       ('Creative'),
+       ('Open World'),
+       ('Free'),
+       ('PVE'),
+       ('Fantasy'),
+       ('Dark'),
+       ('Souls-like'),
+       ('Co-op'),
+       ('Hunting');
 
 -- Update genre for existing games
 UPDATE games
 SET genre_ids = ARRAY(
-    SELECT genre_id FROM game_genres WHERE genre_name = ANY('{FPS, Battle Royale, Multiplayer, Free}')
-)
+        SELECT genre_id FROM game_genres WHERE genre_name = ANY ('{FPS, Battle Royale, Multiplayer, Free}')
+                )
 WHERE game_id = 1;
 
 UPDATE games
 SET genre_ids = ARRAY(
-    SELECT genre_id FROM game_genres WHERE genre_name = ANY('{Open World, RPG, Dark, Fantasy, Souls-like}')
-)
+        SELECT genre_id FROM game_genres WHERE genre_name = ANY ('{Open World, RPG, Dark, Fantasy, Souls-like}')
+                )
 WHERE game_id = 2;
 
 UPDATE games
 SET genre_ids = ARRAY(
-    SELECT genre_id FROM game_genres WHERE genre_name = ANY('{Co-op, Multiplayer, Third Person, PVE}')
-)
+        SELECT genre_id FROM game_genres WHERE genre_name = ANY ('{Co-op, Multiplayer, Third Person, PVE}')
+                )
 WHERE game_id = 3;
 
 UPDATE games
 SET genre_ids = ARRAY(
-    SELECT genre_id FROM game_genres WHERE genre_name = ANY('{Co-op, Multiplayer, Action, Open World, RPG, Hunting}')
-)
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY ('{Co-op, Multiplayer, Action, Open World, RPG, Hunting}')
+                )
 WHERE game_id = 4;
 
 UPDATE games
 SET genre_ids = ARRAY(
-    SELECT genre_id FROM game_genres WHERE genre_name = ANY('{Action, RPG, Co-op, Multiplayer, Hunting}')
-)
+        SELECT genre_id FROM game_genres WHERE genre_name = ANY ('{Action, RPG, Co-op, Multiplayer, Hunting}')
+                )
 WHERE game_id = 5;
 
 -- Insert dummy promotions into the promotions table
