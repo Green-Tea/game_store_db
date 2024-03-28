@@ -528,6 +528,10 @@ UPDATE games
 SET promotion_id = 2
 WHERE title = 'HELLDIVERS 2';
 
+UPDATE games
+SET promotion_id = 2
+WHERE game_id = 5;
+
 -- CASE: John Doe purchases world of warcraft and assassin creed valhalla
 BEGIN;
 
