@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS promotions CASCADE;
 DROP TABLE IF EXISTS publishers CASCADE;
 DROP TABLE IF EXISTS games CASCADE;
 DROP TABLE IF EXISTS customers CASCADE;
+DROP TABLE IF EXISTS customer_wishlist CASCADE;
 DROP TABLE IF EXISTS transaction_details CASCADE;
 DROP TABLE IF EXISTS game_purchases CASCADE;
 DROP TABLE IF EXISTS game_ratings CASCADE;
@@ -25,7 +26,7 @@ CREATE TABLE publishers
     publisher_id  SERIAL PRIMARY KEY,
     name          VARCHAR(255) UNIQUE NOT NULL,
     email         VARCHAR(255) UNIQUE NOT NULL,
-    address       VARCHAR(255) UNIQUE NOT NULL,
+    address       VARCHAR(255) NOT NULL,
     revenue_split INT                 NOT NULL
 );
 
@@ -37,8 +38,8 @@ CREATE TABLE game_genres
 
 CREATE TABLE games
 (
-    game_id        SERIAL PRIMARY KEY,
-    title          VARCHAR(255)   NOT NULL,
+    game_id        SERIAL PRIMARY KEY UNIQUE,
+    title          VARCHAR(255)   NOT NULL UNIQUE,
     description    TEXT,
     retail_price   DECIMAL(10, 2) NOT NULL,
     modified_price DECIMAL(10, 2) DEFAULT NULL,
@@ -122,7 +123,8 @@ CREATE TABLE customers
     display_name   VARCHAR(20),
     email          VARCHAR(255) NOT NULL,
     password       VARCHAR(64)  NOT NULL,
-    owned_game_ids INT[] DEFAULT ARRAY []::INT[]
+    owned_game_ids INT[] DEFAULT ARRAY []::INT[] NULL,
+    wishlisted_game_id INT[] DEFAULT ARRAY[]::INT[] NULL
 );
 
 CREATE TABLE customer_payment_info
@@ -136,22 +138,6 @@ CREATE TABLE customer_payment_info
     card_issuer     VARCHAR(255) NOT NULL,
 
     CONSTRAINT customer_payment_info_fk FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
-);
-
-/*
-Wishlist. Allow users to create and manage wish lists of games they are interested in purchasing
-in the future.
-*/
-CREATE TABLE customer_wishlist
-(
-    customer_id    SERIAL PRIMARY KEY,
-    first_name     VARCHAR(255) NOT NULL,
-    last_name      VARCHAR(255) NOT NULL,
-    display_name   VARCHAR(20),
-    game_id        SERIAL PRIMARY KEY,
-    title          VARCHAR(255)   NOT NULL,
-    retail_price   DECIMAL(10, 2) NOT NULL,
-    modified_price DECIMAL(10, 2) DEFAULT NULL
 );
 
 CREATE TABLE transaction_details
