@@ -180,3 +180,27 @@ VALUES (1, currval('transaction_details_transaction_id_seq'), 2),
        (1, currval('transaction_details_transaction_id_seq'), 4);
 
 COMMIT;
+
+-- Mary Jane buys 3 games, one of which is a free game
+BEGIN;
+
+INSERT INTO transaction_details (customer_id, amount)
+VALUES (2, 70.00);
+
+INSERT INTO game_purchases(customer_id, transaction_id, game_id)
+VALUES (2, currval('transaction_details_transaction_id_seq'), 1),
+       (2, currval('transaction_details_transaction_id_seq'), 2),
+       (2, currval('transaction_details_transaction_id_seq'), 3);
+
+COMMIT;
+
+-- Clark Kent buys a single game on sale
+BEGIN;
+
+INSERT INTO transaction_details (customer_id, amount)
+VALUES (3, 32.00);
+
+INSERT INTO game_purchases (customer_id, transaction_id, game_id)
+VALUES (3, currval('transaction_details_transaction_id_seq'), 5);
+
+COMMIT;
