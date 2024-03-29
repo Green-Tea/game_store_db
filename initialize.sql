@@ -48,6 +48,7 @@ CREATE TABLE games
     developer_name VARCHAR(255)   NOT NULL, -- We only need to store the name for documentation purposes. We have no actual contact with developers
     release_date   DATE,
     genre_ids      INT[]          DEFAULT ARRAY []::INT[],
+    wishlists      INT            DEFAULT 0,
 
     CONSTRAINT games_promotion_fk FOREIGN KEY (promotion_id) REFERENCES promotions (promotion_id),
     CONSTRAINT games_publisher_fk FOREIGN KEY (publisher_id) REFERENCES publishers (publisher_id)
@@ -62,58 +63,6 @@ CREATE TABLE game_genres_junction
     CONSTRAINT fk_game FOREIGN KEY (game_id) REFERENCES games (game_id) ON DELETE CASCADE,
     CONSTRAINT fk_genre FOREIGN KEY (genre_id) REFERENCES game_genres (genre_id) ON DELETE CASCADE
 );
-
-CREATE OR REPLACE FUNCTION update_modified_price()
-    RETURNS TRIGGER AS
-$$
-DECLARE
-    game_retail_price   DECIMAL(10, 2);
-    discount_multiplier DECIMAL(10, 2);
-BEGIN
-    SELECT retail_price INTO game_retail_price FROM games WHERE game_id = NEW.game_id;
-
-    discount_multiplier :=
-            1 - (SELECT discount_percent FROM promotions WHERE promotion_id = NEW.promotion_id)::DECIMAL / 100;
-
-    IF NEW.promotion_id IS NOT NULL THEN
-        NEW.modified_price = game_retail_price * discount_multiplier;
-    ELSE
-        NEW.modified_price = NULL;
-    END IF;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-
-CREATE TRIGGER games_update_modified_price
-    BEFORE INSERT OR UPDATE OF promotion_id
-    ON games
-    FOR EACH ROW
-EXECUTE FUNCTION update_modified_price();
-
-CREATE OR REPLACE FUNCTION update_game_genres_junction()
-    RETURNS TRIGGER AS
-$$
-BEGIN
-    IF TG_TABLE_NAME = 'games' AND TG_OP = 'UPDATE' AND NEW.genre_ids <> OLD.genre_ids THEN
-        DELETE FROM game_genres_junction WHERE game_id = NEW.game_id;
-
-        INSERT INTO game_genres_junction (game_id, genre_id)
-        SELECT NEW.game_id, genre_id
-        FROM game_genres
-        WHERE genre_id = ANY (NEW.genre_ids);
-    END IF;
-
-    RETURN NULL;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER update_game_genres_trigger
-    AFTER UPDATE OF genre_ids
-    ON games
-    FOR EACH ROW
-EXECUTE FUNCTION update_game_genres_junction();
 
 CREATE TABLE customers
 (
