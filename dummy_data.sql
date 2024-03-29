@@ -453,6 +453,127 @@ SET
     )
 WHERE game_id = 5;
 
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{Adventure, Action, RPG, Fighting Game, Shooter, Platform}')
+    )
+WHERE game_id = 6;
+
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{FPS, Shooter, Adventure}')
+    )
+WHERE game_id = 7;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{RPG, Action, Adventure, Fighting Game, Shooter}')
+    )
+WHERE game_id = 8;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{Action, RPG, Fighting Game, Adventure, Survival, Horror}')
+    )
+WHERE game_id = 9;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{Puzzle, Action, Adventure}')
+    )
+WHERE game_id = 10
+;UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{Action, Adventure, RPG, Shooter}')
+    )
+WHERE game_id = 11;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{FPS, Shooter, Fighting Game}')
+    )
+WHERE game_id = 12;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{MMORPG, RPG, Adventure}')
+    )
+WHERE game_id = 13;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{Puzzle, FPS, Action, Adventure}')
+    )
+WHERE game_id = 14;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{Puzzle, Action, Adventure, Fighting Game}')
+    )
+WHERE game_id = 15;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{RTS, Adventure}')
+    )
+WHERE game_id = 16;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{Racing, Adventure}')
+    )
+WHERE game_id = 17;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{Action, Adventure, RPG}')
+    )
+WHERE game_id = 18;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{Survival, Horror, Adventure, Third Person, Shooter}')
+    )
+WHERE game_id = 19;
+UPDATE games
+SET
+    genre_ids = ARRAY(
+        SELECT genre_id
+        FROM game_genres
+        WHERE genre_name = ANY('{Adventure, Action, Survival, Horror, Shooter}')
+    )
+WHERE game_id = 20;
 -- Insert dummy promotions into the promotions table
 INSERT INTO promotions (
     discount_percent, promotion_description, start_date, end_date
