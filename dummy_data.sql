@@ -4,9 +4,7 @@ INSERT INTO customers (
     last_name,
     display_name,
     email,
-    password,
-    owned_game_ids,
-    wishlisted_game_id
+    password
 )
 VALUES (
     'John',
