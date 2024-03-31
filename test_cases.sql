@@ -1,7 +1,7 @@
 -- CASE: John Doe purchases World of Warcraft and Assassin Creed Valhalla
 BEGIN;
 
--- Transaction amount and customer id is known
+-- Transaction amount = sum the prices of all games bought (keep promotions in mind, you will have to reference the games table for the modified price)
 INSERT INTO transaction_details (customer_id, amount)
 VALUES (1, 109.98);
 
