@@ -637,3 +637,52 @@ VALUES (
     CAST('2024-11-29' AS DATE),
     CAST('2024-11-30' AS DATE)
 );
+
+-- Append promotions to games
+-- @kid please append relevant promotions to some of the games
+UPDATE games
+SET
+    promotion_id = 2
+WHERE
+    game_id = 5;
+
+-- Create wishlist for customers
+-- first two are examples of how wishlists would be added in production
+-- REMEMBER ADDING A WISHLIST MUST MODIFY TWO TABLES
+UPDATE customers
+SET
+    wishlisted_game_id = wishlisted_game_id || 4
+WHERE
+    customer_id = 1;
+
+UPDATE games
+SET
+    wishlists = wishlists + 1
+WHERE
+    game_id = 4;
+
+UPDATE customers
+SET
+    wishlisted_game_id = wishlisted_game_id || 6
+WHERE
+    customer_id = 1;
+
+UPDATE games
+SET
+    wishlists = wishlists + 1
+WHERE
+    game_id = 6;
+
+-- to save our time we can continue adding wishlists like this
+UPDATE customers
+SET
+    wishlisted_game_id = ARRAY[1,2,3]
+WHERE
+    customer_id = 2;
+
+UPDATE games
+SET
+    wishlists = wishlists + 1
+WHERE
+    game_id = ANY(ARRAY[1, 2, 3]);
+
