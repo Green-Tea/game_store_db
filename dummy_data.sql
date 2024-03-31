@@ -816,5 +816,9 @@ SET
 WHERE
     game_id = ANY(ARRAY[15, 18, 20]);
 
-
-
+INSERT INTO game_ratings (game_id, customer_id, rating, comment) VALUES (1,1,5, 'I love this game!');
+INSERT INTO game_ratings (game_id, customer_id, rating, comment)
+VALUES (1, 2, 1, 'Too laggy'),
+       (1, 3, 4, 'Fun game.'),
+       (7, 1, 3, 'Good graphics but a bit boring'),
+       (2, 2, 2, 'Meh');
