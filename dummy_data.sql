@@ -739,3 +739,82 @@ SET
 WHERE
     game_id = ANY(ARRAY[1, 2, 3]);
 
+UPDATE customers -- customer 3
+SET
+    wishlisted_game_id = ARRAY[6,11,14]
+WHERE
+    customer_id = 3;
+
+UPDATE games
+SET
+    wishlists = wishlists + 1
+WHERE
+    game_id = ANY(ARRAY[6, 14, 11]);
+
+
+UPDATE customers -- customer 4
+SET
+    wishlisted_game_id = ARRAY[20]
+WHERE
+    customer_id = 4;
+
+UPDATE games
+SET
+    wishlists = wishlists + 1
+WHERE
+    game_id = ANY(ARRAY[20]);
+
+
+UPDATE customers -- customer 5
+SET
+    wishlisted_game_id = ARRAY[7,8]
+WHERE
+    customer_id = 5;
+
+UPDATE games
+SET
+    wishlists = wishlists + 1
+WHERE
+    game_id = ANY(ARRAY[7,8]);
+
+
+UPDATE customers -- customer 6
+SET
+    wishlisted_game_id = ARRAY[2, 19]
+WHERE
+    customer_id = 6;
+
+UPDATE games
+SET
+    wishlists = wishlists + 1
+WHERE
+    game_id = ANY(ARRAY[2,19]);
+
+
+UPDATE customers -- customer 7
+SET
+    wishlisted_game_id = ARRAY[5, 13, 16, 17, 19]
+WHERE
+    customer_id = 7;
+
+UPDATE games
+SET
+    wishlists = wishlists + 1
+WHERE
+    game_id = ANY(ARRAY[5, 13, 16, 17, 19]);
+
+
+UPDATE customers -- customer 9
+SET
+    wishlisted_game_id = ARRAY[15,18,20]
+WHERE
+    customer_id = 9;
+
+UPDATE games
+SET
+    wishlists = wishlists + 1
+WHERE
+    game_id = ANY(ARRAY[15, 18, 20]);
+
+
+
