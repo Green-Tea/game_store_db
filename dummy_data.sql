@@ -640,11 +640,64 @@ VALUES (
 
 -- Append promotions to games
 -- @kid please append relevant promotions to some of the games
-UPDATE games
+UPDATE games -- March 2024
 SET
     promotion_id = 2
 WHERE
     game_id = 5;
+
+UPDATE games -- ELDEN Ring Mid March
+SET
+    promotion_id = 3
+WHERE
+    game_id = 4;
+
+UPDATE games -- Jan Flash Sale
+SET
+    promotion_id = 1
+WHERE
+    game_id IN (9, 10);
+
+UPDATE games -- Summer 2024
+SET
+    promotion_id = 4
+WHERE
+    game_id IN (2, 17, 20);
+    
+UPDATE games -- CapCom Aniversary
+SET
+    promotion_id = 5
+WHERE
+    game_id = 19;
+
+UPDATE games -- Spring 2024
+SET
+    promotion_id = 6
+WHERE
+    game_id = 1;
+UPDATE games -- May Madness
+SET
+    promotion_id = 7
+WHERE
+    game_id = 14;
+
+UPDATE games -- End of Year
+SET
+    promotion_id = 8
+WHERE
+    game_id = 11;
+
+UPDATE games -- Holiday Special
+SET
+    promotion_id = 9
+WHERE
+    game_id IN (12, 13);
+
+UPDATE games -- Black Friday
+SET
+    promotion_id = 10
+WHERE
+    game_id IN (6, 7, 18);
 
 -- Create wishlist for customers
 -- first two are examples of how wishlists would be added in production
